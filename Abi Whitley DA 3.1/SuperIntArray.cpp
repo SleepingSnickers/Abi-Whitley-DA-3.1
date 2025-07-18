@@ -46,14 +46,14 @@ SuperIntArray::~SuperIntArray() {
 	delete[] nums;
 }
 
-int SuperIntArray::getNums(int num) {
+int SuperIntArray::getNums(int num) const {
 	//edited my original code to include the if statement!
 	if (num >= 0 && num < numberOfNums) {
 		return nums[num];
 	}
 }
 
-int SuperIntArray::getSize() {
+int SuperIntArray::getSize() const {
 	return numberOfNums;
 }
 
@@ -82,7 +82,7 @@ void SuperIntArray::add(int nums) {
 	numberOfNums++;
 }
 
-int SuperIntArray::get(int index) {
+int SuperIntArray::get(int index) const {
 	if (index >= 0 && index < numberOfNums) {
 		return nums[index];
 	}
@@ -95,9 +95,22 @@ void SuperIntArray::change(int index, int value) {
 	}
 }
 
+double SuperIntArray::getMax() const {
+	return getMax(nums, numberOfNums);
+}
+
+double SuperIntArray::getMin() const {
+	return getMin(nums, numberOfNums);
+}
+
+double SuperIntArray::getMean() const {
+	return getMean(nums, numberOfNums);
+}
+
 double SuperIntArray::getMax(int nums[], int size) {
 	int max = nums[0];
-	for (int i = 1; i < size; i++) {
+
+	for (int i = 0; i < size; i++) {
 		if (nums[i] > max) {
 			max = nums[i];
 		}
@@ -107,7 +120,7 @@ double SuperIntArray::getMax(int nums[], int size) {
 
 double SuperIntArray::getMin(int nums[], int size) {
 	int min = nums[0];
-	for (int i = 1; i < size; i++) {
+	for (int i = 0; i < size; i++) {
 		if (nums[i] < min) {
 			min = nums[i];
 		}
@@ -120,9 +133,6 @@ double SuperIntArray::getMean(int nums[], int size) {
 	for (int i = 0; i < size; i++) {
 		sum += nums[i];
 	}
-	if (size > 0) {
-		return sum / size;
-	}
 	
-	return 0;
+	return static_cast<double>(sum) / size;
 }
